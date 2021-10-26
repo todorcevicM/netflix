@@ -5,4 +5,4 @@ sources:
     schema: raw_data
     tables:
       - name: titles
-
+      
