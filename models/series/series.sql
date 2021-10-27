@@ -15,7 +15,7 @@ select
 		else country
 	end, 
 
-	to_date(date_added, 'Month DD, YYYY'), 
+	to_date(date_added, 'Month DD, YYYY') as date_added, 
 
 	cast(release_year as integer), 
 
