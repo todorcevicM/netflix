@@ -5,11 +5,16 @@ sources:
     schema: raw_data
     tables: 
       - name: titles
-        columns:  
-          - name: show_id
-            tests: 
-              - unique
-              - not_null
-          - name: title
-            tests:
-              - not_null
+        
+
+models: 
+  - name: series
+    columns:
+      - name: "id"
+        tests:
+          - not_null
+          - unique
+      - name: title
+        tests:
+          - unique
+        
