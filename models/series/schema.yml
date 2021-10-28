@@ -6,3 +6,15 @@ sources:
     tables: 
       - name: titles
         
+
+models: 
+  - name: series
+    columns:
+      - name: "id"
+        tests:
+          - not_null
+          - unique
+      - name: title
+        tests:
+          - unique
+        
