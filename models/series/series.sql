@@ -6,18 +6,18 @@ select
 	case 
 		when director like '%,%' then left(director, position(',' in director) - 1)
 		else director
-	end, 
+	end as director, 
 
 	"cast", 
 
 	case 
 		when country like '%,%' then left(country, position(',' in country) - 1)
 		else country
-	end, 
+	end as country, 
 
 	to_date(date_added, 'Month DD, YYYY') as date_added, 
 
-	cast(release_year as integer), 
+	cast(release_year as integer) as release_year, 
 
 	rating, 
 
