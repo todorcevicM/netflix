@@ -3,7 +3,7 @@ with numbers as (
 )
 
 select 
-	"id" as show_id, 
+	"id" as series_id, 
 
 	null as movie_id,
 
@@ -18,7 +18,7 @@ where "cast" is not null
 union all
 
 select 
-	null as show_id,
+	null as series_id,
 
 	"id" as movie_id,
 
