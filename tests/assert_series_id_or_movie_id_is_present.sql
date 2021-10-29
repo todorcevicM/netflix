@@ -5,4 +5,4 @@ select
 
 from {{ ref('title_actor')}}
 
-where (series_id is null and movie_id is null)
+where not(series_id is not null and movie_id is null or series_id is null and movie_id is not null)

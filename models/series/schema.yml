@@ -30,7 +30,7 @@ models:
 
   - name: title_actor
     columns:
-      - name: show_id
+      - name: series_id
       - name: movie_id
       - name: actor_name 
         tests:

@@ -1,32 +1,44 @@
-with numbers as (
-	select generate_series(1, 50) as number
+with combinations as (
+	
+	with numbers as (
+		select generate_series(1, 50) as number
+	)
+
+	select 
+		"id" as series_id, 
+
+		null as movie_id,
+
+		nullif(split_part("cast", ',', numbers.number), '') as "actor_name"
+
+	from {{ ref('series') }}
+
+	cross join numbers
+
+	where "cast" is not null
+
+	union all
+
+	select 
+		null as series_id,
+
+		"id" as movie_id,
+
+		nullif(split_part("cast", ',', numbers.number), '') as "actor_name"
+
+	from {{ ref('movies') }}
+
+	cross join numbers
+
+	where "cast" is not null
 )
 
 select 
-	"id" as series_id, 
+	*
 
-	null as movie_id,
+from combinations 
 
-	split_part("cast", ',', numbers.number) as actor_name 
+where combinations.actor_name is not null
 
-from {{ ref('series') }}
 
-cross join numbers
-
-where "cast" is not null
-
-union all
-
-select 
-	null as series_id,
-
-	"id" as movie_id,
-
-	split_part("cast", ',', numbers.number) as actor_name
-
-from {{ ref('movies') }}
-
-cross join numbers
-
-where "cast" is not null
 
