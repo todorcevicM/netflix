@@ -27,3 +27,11 @@ models:
       - name: title
         tests:
           - unique
+
+  - name: title_actor
+    columns:
+      - name: show_id
+      - name: movie_id
+      - name: actor_name 
+        tests:
+          - not_null
