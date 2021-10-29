@@ -3,6 +3,6 @@ select
 
     movie_id
 
-from {{ ref('titles_actor')}}
+from {{ ref('title_actor')}}
 
 where not(show_id is null or movie_id is null)
