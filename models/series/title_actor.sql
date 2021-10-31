@@ -1,5 +1,5 @@
 with combinations as (
-	
+
 	with numbers as (
 		select generate_series(1, 50) as number
 	)
@@ -9,7 +9,10 @@ with combinations as (
 
 		null as movie_id,
 
-		nullif(split_part("cast", ',', numbers.number), '') as "actor_name"
+		case 
+			when nullif(split_part("cast", ',', numbers.number), '') like ' %' then right( nullif(split_part("cast", ',', numbers.number), ''), position(' %' in nullif(split_part("cast", ',', numbers.number), '')) -1 )
+			else nullif(split_part("cast", ',', numbers.number), '')
+		end as actor_name
 
 	from {{ ref('series') }}
 
@@ -24,7 +27,10 @@ with combinations as (
 
 		"id" as movie_id,
 
-		nullif(split_part("cast", ',', numbers.number), '') as "actor_name"
+		case 
+			when nullif(split_part("cast", ',', numbers.number), '') like ' %' then right( nullif(split_part("cast", ',', numbers.number), ''), position(' %' in nullif(split_part("cast", ',', numbers.number), '')) -1 )
+			else nullif(split_part("cast", ',', numbers.number), '')
+		end as actor_name
 
 	from {{ ref('movies') }}
 
@@ -38,7 +44,7 @@ select
 
 from combinations 
 
-where combinations.actor_name is not null
+where combinations.actor_name is not null 
 
 
 
