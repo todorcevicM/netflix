@@ -54,11 +54,3 @@ models:
       - name: most_common_genre_titles_count
         tests:
           - not_null
-      
-
-
-      
-      
-      
-      
-      
