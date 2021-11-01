@@ -51,11 +51,8 @@ models:
       - name: most_common_genre
         tests: 
           - not_null
-      - name: most_common_genre_series_count
+      - name: most_common_genre_titles_count
         tests:
-          - not_null
-      - name: most_common_genre_movie_count
-        tests: 
           - not_null
       
 

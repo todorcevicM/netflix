@@ -12,7 +12,7 @@ with combinations as (
 		case 
 			when nullif(split_part("cast", ',', numbers.number), '') like ' %' then right( nullif(split_part("cast", ',', numbers.number), ''), position(' %' in nullif(split_part("cast", ',', numbers.number), '')) -1 )
 			else nullif(split_part("cast", ',', numbers.number), '')
-		end as actor_name
+		end as actor_name 
 
 	from {{ ref('series') }}
 
