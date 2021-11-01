@@ -6,7 +6,9 @@ select
 	count(movie_id) as movie_count, 
 
 	case 
-		when max(sgenre) is not null then max(sgenre) 
+		when max(sgenre) is not null and max(mgenre) is not null and max(sgenre) >= max(mgenre) then max(sgenre) 
+		when max(sgenre) is not null and max(mgenre) is not null and max(mgenre) > max(sgenre) then max(mgenre)
+		when max(sgenre) is not null and max(mgenre) is null then max(sgenre)
 		else max(mgenre)
 	end as most_common_genre, 
 
