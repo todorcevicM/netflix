@@ -48,3 +48,9 @@ models:
       - name: most_common_genre_count
         tests:
           - not_null
+      - name: movie_count
+        tests:
+          - not_null
+      - name: series_count
+        tests: 
+          - not_null
