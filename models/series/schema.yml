@@ -42,15 +42,9 @@ models:
         tests:
           - not_null
           - unique 
-      - name: series_count
-        tests: 
-          - not_null
-      - name: movie_count
-        tests:
-          - not_null
       - name: most_common_genre
         tests: 
           - not_null
-      - name: most_common_genre_titles_count
+      - name: most_common_genre_count
         tests:
           - not_null
