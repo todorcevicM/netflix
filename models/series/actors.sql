@@ -39,9 +39,19 @@ with ranked_genre_frequency as (
 		
 	from titles_genre_frequency 
 
-) 
+), titles_count as (
+	select 
+		actor_name, 
+		sum(case when movie_id is not null then 1 else 0 end) as movie_count,
+		sum(case when series_id is not null then 1 else 0 end) as series_count
+		
+	from {{ ref('title_actor') }} 
+
+	group by actor_name
+)
+
 select
-	actor_name as "name", 
+	ranked_genre_frequency.actor_name as "name", 
 	movie_count, 
 	series_count, 
 	genre as "most_common_genre", 
@@ -49,40 +59,8 @@ select
 
 from ranked_genre_frequency 
 
-join (
-	select 
-		coalesce(movies_counts.actor_name, series_counts.actor_name) as "name", 
-		coalesce(movie_count, 0) as movie_count, 
-		coalesce(series_count, 0) as series_count
+join titles_count
 
-	from (
-		select 
-			actor_name, 
-			count(*) as movie_count 
-			
-		from {{ ref('title_actor') }} 
-		
-		where movie_id is not null
-
-		group by actor_name
-	) movies_counts
-
-	full outer join (
-		select 
-			actor_name, 
-			count(*) as series_count 
-			
-		from {{ ref('title_actor') }} 
-		
-		where series_id is not null
-
-		group by actor_name
-	) series_counts
-	on movies_counts.actor_name = series_counts.actor_name 
-	
-	order by movie_count desc
-) titles_count 
-
-on titles_count.name = ranked_genre_frequency.actor_name
+on ranked_genre_frequency.actor_name = titles_count.actor_name
 
 where "row_number" = 1
