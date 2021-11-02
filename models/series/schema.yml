@@ -35,3 +35,22 @@ models:
       - name: actor_name 
         tests:
           - not_null
+
+  - name: actors
+    columns: 
+      - name: name
+        tests:
+          - not_null
+          - unique 
+      - name: most_common_genre
+        tests: 
+          - not_null
+      - name: most_common_genre_count
+        tests:
+          - not_null
+      - name: movie_count
+        tests:
+          - not_null
+      - name: series_count
+        tests: 
+          - not_null
